@@ -1,0 +1,72 @@
+# Gopkg.toml example
+#
+# Refer to https://golang.github.io/dep/docs/Gopkg.toml.html
+# for detailed Gopkg.toml documentation.
+#
+
+required = [ 
+  # vendor subpacakge which contains .go files to work around dep issue:
+  # https://github.com/golang/dep/issues/1306
+  "k8s.io/repo-infra/kazel"
+]
+
+# TODO update to use latest k8s code
+
+[[constraint]]
+  name = "k8s.io/client-go"
+  version = "10.0.0"
+
+[[constraint]]
+  name = "k8s.io/apimachinery"
+  branch = "release-1.13"
+
+[[constraint]]
+  name = "k8s.io/kubernetes"
+  branch = "release-1.13"
+
+[[override]]
+  name = "k8s.io/apiserver"
+  branch = "release-1.13"
+
+[[override]]
+  name = "k8s.io/apiextensions-apiserver"
+  branch = "release-1.13"
+
+[[override]]
+  name = "k8s.io/api"
+  branch = "release-1.13"
+
+# Required by github.com/kubernetes/kubernetes/blob/release-1.13/Godeps/Godeps.json
+[[override]]
+  name = "k8s.io/kube-openapi"
+  revision = "c59034cc13d587f5ef4e85ca0ade0c1866ae8e1d"
+
+# Required by github.com/kubernetes/kubernetes/blob/release-1.13/Godeps/Godeps.json
+[[override]]
+  name = "github.com/docker/distribution"
+  revision = "edc3ab29cdff8694dd6feb85cfeb4b5f1b38ed9c"
+
+# Required by github.com/kubernetes/kubernetes/blob/release-1.13/Godeps/Godeps.json
+[[override]]
+  name = "github.com/docker/docker"
+  revision = "a9fbbdc8dd8794b20af358382ab780559bca589d"
+
+# Required by github.com/kubernetes/kubernetes/blob/release-1.13/Godeps/Godeps.json
+[[override]]
+  name = "github.com/docker/go-connections"
+  version = "v0.3.0"
+
+# Required by github.com/kubernetes/kubernetes/blob/release-1.13/Godeps/Godeps.json
+[[override]]
+  name = "github.com/docker/go-units"
+  revision = "9e638d38cf6977a37a8ea0078f3ee75a7cdb2dd1"
+
+[prune]
+  non-go = true
+  go-tests = true
+  unused-packages = true
+
+  [[prune.project]]
+  name = "k8s.io/repo-infra"
+  non-go = false
+  unused-packages = false

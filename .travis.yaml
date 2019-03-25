@@ -1,0 +1,14 @@
+dist: xenial
+language: go
+go:
+  - 1.11.2
+go_import_path: github.com/cofyc/k8s-rebalancer
+services: docker
+install: true
+script:
+  - make ${TARGET}
+jobs:
+  include:
+  - env: TARGET=verify
+  - env: TARGET=build
+  - env: TARGET=test
