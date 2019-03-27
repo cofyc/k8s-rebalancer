@@ -1,5 +1,4 @@
-ARG GOVERSION=1.11.2
-FROM golang:$GOVERSION-alpine as builder
+FROM golang:1.11-alpine as builder
 WORKDIR /go/src/github.com/cofyc/k8s-rebalancer
 ADD . .
 RUN CGO_ENABLED=0 go build -o k8s-rebalancer github.com/cofyc/k8s-rebalancer/cmd/k8s-rebalancer
