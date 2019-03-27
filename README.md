@@ -1,6 +1,7 @@
 # k8s-rebalancer
 
 [![Build Status](https://travis-ci.com/cofyc/k8s-rebalancer.svg?token=d2ZWjsd7VLnLR8jqd2ay&branch=master)](https://travis-ci.com/cofyc/k8s-rebalancer)
+[![Docker Repository on Quay](https://quay.io/repository/cofyc/k8s-rebalancer/status "Docker Repository on Quay")](https://quay.io/repository/cofyc/k8s-rebalancer)
 
 This is a simple kubernetes controller which rebalances pods across nodes in
 cluster.
