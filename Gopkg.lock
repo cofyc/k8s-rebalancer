@@ -672,6 +672,7 @@
     "k8s.io/klog",
     "k8s.io/kubernetes/pkg/api/v1/node",
     "k8s.io/kubernetes/pkg/api/v1/pod",
+    "k8s.io/kubernetes/pkg/apis/core/v1/helper",
     "k8s.io/kubernetes/pkg/kubectl/util/qos",
     "k8s.io/kubernetes/pkg/scheduler/apis/config",
     "k8s.io/kubernetes/pkg/scheduler/cache",

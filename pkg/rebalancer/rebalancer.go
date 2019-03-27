@@ -463,14 +463,24 @@ func (r *Rebalancer) run() {
 	return
 }
 
+func isAbleToScheduledTo(pod *v1.Pod, nodeInfo *rebalancercache.NodeInfo) bool {
+	nodeInfo.AddPod(pod)
+	defer nodeInfo.RemovePod(pod) // we will add it when pod is able to be drained from original node
+	if nodeInfo.Score() > targetScore {
+		return false
+	}
+	return true
+}
+
 func (r *Rebalancer) findScheduableNodeFromList(pod *v1.Pod, scoredNodeInfos []*scoredNodeInfo) (*rebalancercache.NodeInfo, error) {
 	for _, scoredNodeInfo := range scoredNodeInfos {
 		nodeInfo := scoredNodeInfo.nodeInfo
-		nodeInfo.AddPod(pod)
-		if nodeInfo.Score() > targetScore {
+		if !podToleratesNodeTaints(pod, nodeInfo.Node()) {
 			continue
 		}
-		nodeInfo.RemovePod(pod) // we will add it when pod is able to be drained from original node
+		if !isAbleToScheduledTo(pod, nodeInfo) {
+			continue
+		}
 		return nodeInfo, nil
 	}
 	// TODO evaluate more scheduling criteria
