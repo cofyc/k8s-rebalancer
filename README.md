@@ -14,7 +14,7 @@ cluster.
 
 -> evaluating
 
-Find at most `maxEvictablePodsAtOnce` pods that are able to be scheduled to
+Find at most `maxUnscheduledPodsAllowedInCluster` pods that are able to be scheduled to
 low scored nodes from high scored nodes. Currently, we only takes CPU/Memory
 requested resources into account. 
 
@@ -52,8 +52,8 @@ This is same as kubernetes ["MostResourceAllocation" priority](https://github.co
 - support draining pods using PVCs
 - evaluate more scheduling criteria
 - check `rollingUpdate` strategy of deployment/statefulset controllers, then it
-	possible to draining more pods under same controller at same time
-- imbalance resource usage between CPU and memory
+  is possible to drain more pods under same controller at same time
+- rebalance resource usage between CPU and memory
 - rebalance based on real resource usage on nodes
 - metrics, e.g. total drained pods, draining pods etc.
 
