@@ -40,7 +40,7 @@ const (
 	maxUnscheduledPodsAllowedInCluster = 3
 	drainingTimeout                    = time.Minute
 
-	// Set this annotation in pod if we are go draining it.
+	// Set this annotation in pod if we are going to drain it.
 	// Note that we clear this annotation if pod DeletionTimestamp is nil,
 	// which means we failed to delete/drain this pod last time.
 	rebalancerDrainingAnnotation = "k8s-rebalancer.yechenfu.com/draining"
@@ -275,8 +275,8 @@ func (r *Rebalancer) cleanup() error {
 	if err != nil {
 		return err
 	}
-	// It is possible we marked a pod to drain but failed to drain because API
-	// failure or program crash, etc.
+	// It is possible we marked a pod to drain but failed to drain because of
+	// API failure or program crash, etc.
 	// It's safe to clear our annotation in main single-threaded loop.
 	for _, pod := range pods {
 		if _, ok := pod.Annotations[rebalancerDrainingAnnotation]; ok && pod.DeletionTimestamp == nil {
