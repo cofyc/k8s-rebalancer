@@ -4,9 +4,7 @@ import (
 	"time"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/apimachinery/pkg/runtime"
-	apiserverapisconfig "k8s.io/apiserver/pkg/apis/config"
-	schedulerapisconfig "k8s.io/kubernetes/pkg/scheduler/apis/config"
+	apiserverconfigv1alpha1 "k8s.io/apiserver/pkg/apis/config/v1alpha1"
 )
 
 // GenericComponentConfiguration is generic component configuration.
@@ -23,29 +21,18 @@ type GenericComponentConfiguration struct {
 	// How long to wait between starting controller managers
 	ControllerStartInterval metav1.Duration
 	// leaderElection defines the configuration of leader election client.
-	LeaderElection apiserverapisconfig.LeaderElectionConfiguration
+	LeaderElection apiserverconfigv1alpha1.LeaderElectionConfiguration
 }
 
 // NewDefaultGenericComponentConfiguration returns default GenericComponentConfiguration.
 func NewDefaultGenericComponentConfiguration() GenericComponentConfiguration {
-	return GenericComponentConfiguration{
+	c := GenericComponentConfiguration{
 		MinResyncPeriod:         metav1.Duration{Duration: 12 * time.Hour},
 		ContentType:             "application/vnd.kubernetes.protobuf",
 		KubeAPIQPS:              20,
 		KubeAPIBurst:            30,
 		ControllerStartInterval: metav1.Duration{Duration: 0 * time.Second},
-		LeaderElection:          newDefaultLeaderElectionConfig(),
 	}
-}
-
-func newDefaultLeaderElectionConfig() apiserverapisconfig.LeaderElectionConfiguration {
-	scheme := runtime.NewScheme()
-	schedulerapisconfig.AddToScheme(scheme)
-
-	versioned := schedulerapisconfig.KubeSchedulerConfiguration{}
-	scheme.Default(&versioned)
-
-	internal := schedulerapisconfig.KubeSchedulerConfiguration{}
-	scheme.Convert(&versioned, &internal, nil)
-	return internal.LeaderElection.LeaderElectionConfiguration
+	apiserverconfigv1alpha1.RecommendedDefaultLeaderElectionConfiguration(&c.LeaderElection)
+	return c
 }

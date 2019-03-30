@@ -15,6 +15,6 @@ limitations under the License.
 */
 
 // +k8s:deepcopy-gen=package
-// +groupName=kubescheduler.config.k8s.io
+// +k8s:conversion-gen=k8s.io/apiserver/pkg/apis/config
 
-package config // import "k8s.io/kubernetes/pkg/scheduler/apis/config"
+package v1alpha1 // import "k8s.io/apiserver/pkg/apis/config/v1alpha1"

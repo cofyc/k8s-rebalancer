@@ -45,7 +45,7 @@ func Run(c *config.CompletedConfig) error {
 		select {}
 	}
 
-	if !c.GenericComponent.LeaderElection.LeaderElect {
+	if !*c.GenericComponent.LeaderElection.LeaderElect {
 		run(context.TODO())
 		panic("unreachable")
 	}
