@@ -4,7 +4,7 @@ import (
 	"github.com/cofyc/k8s-rebalancer/pkg/component/config"
 	"github.com/spf13/pflag"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	apiserverapisconfig "k8s.io/apiserver/pkg/apis/config"
+	apiserverconfigv1alpha1 "k8s.io/apiserver/pkg/apis/config/v1alpha1"
 )
 
 // GenericComponentOptions holds the options which are generic.
@@ -14,7 +14,7 @@ type GenericComponentOptions struct {
 	KubeAPIQPS              float32
 	KubeAPIBurst            int32
 	ControllerStartInterval metav1.Duration
-	LeaderElection          apiserverapisconfig.LeaderElectionConfiguration
+	LeaderElection          apiserverconfigv1alpha1.LeaderElectionConfiguration
 }
 
 // NewGenericComponentOptions returns generic configuration default
@@ -73,8 +73,8 @@ func (o *GenericComponentOptions) ApplyTo(cfg *config.GenericComponentConfigurat
 }
 
 // bindLeaderElectionFlags binds the common LeaderElectionCLIConfig flags to a flagset
-func bindLeaderElectionFlags(l *apiserverapisconfig.LeaderElectionConfiguration, fs *pflag.FlagSet) {
-	fs.BoolVar(&l.LeaderElect, "leader-elect", l.LeaderElect, ""+
+func bindLeaderElectionFlags(l *apiserverconfigv1alpha1.LeaderElectionConfiguration, fs *pflag.FlagSet) {
+	fs.BoolVar(l.LeaderElect, "leader-elect", *l.LeaderElect, ""+
 		"Start a leader election client and gain leadership before "+
 		"executing the main loop. Enable this when running replicated "+
 		"components for high availability.")

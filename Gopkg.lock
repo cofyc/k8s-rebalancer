@@ -341,13 +341,12 @@
 
 [[projects]]
   branch = "release-1.13"
-  digest = "1:bdac4b3d9f96b7e5581097d8bccdf726a34f35e4357bef2bdc860ce08ad69cb2"
+  digest = "1:25007e5aca71298609762b6e642a4b7a9643eaf4657ed5dcd2616bb4db47103e"
   name = "k8s.io/apimachinery"
   packages = [
     "pkg/api/errors",
     "pkg/api/meta",
     "pkg/api/resource",
-    "pkg/apis/config",
     "pkg/apis/meta/internalversion",
     "pkg/apis/meta/v1",
     "pkg/apis/meta/v1/unstructured",
@@ -394,10 +393,11 @@
 
 [[projects]]
   branch = "release-1.13"
-  digest = "1:482b80220bbe07564b2e0ed58d858836bfa55c544c5a03d55558aaeac821aef0"
+  digest = "1:9838c7c61fbcce921c6358a11148b6147b4e2ba3adc8a96395997ce81f147041"
   name = "k8s.io/apiserver"
   packages = [
     "pkg/apis/config",
+    "pkg/apis/config/v1alpha1",
     "pkg/features",
     "pkg/util/feature",
     "pkg/util/logs",
@@ -602,7 +602,7 @@
 
 [[projects]]
   branch = "release-1.13"
-  digest = "1:13d02ce2cd8a67e4e23470e4ad57d59c94a13b1929bbccd6a2c295c063519851"
+  digest = "1:7285ebfbd6da0eb1d0dd17d4cadf90af848fd8733048bb26bdc8629103281a84"
   name = "k8s.io/kubernetes"
   packages = [
     "pkg/api/v1/node",
@@ -614,7 +614,6 @@
     "pkg/features",
     "pkg/kubectl/util/qos",
     "pkg/scheduler/algorithm/priorities/util",
-    "pkg/scheduler/apis/config",
     "pkg/scheduler/cache",
     "pkg/scheduler/util",
     "pkg/util/flag",
@@ -629,6 +628,14 @@
   packages = ["kazel"]
   pruneopts = "T"
   revision = "a3f1f8d5b18ad754f553bb59a80334f4f70405a6"
+
+[[projects]]
+  branch = "master"
+  digest = "1:5b4cb4a89696f012fc162d3fcb16aecfecf979ce794cf29c44822c9aa9f4319e"
+  name = "k8s.io/utils"
+  packages = ["pointer"]
+  pruneopts = "NUT"
+  revision = "21c4ce38f2a793ec01e925ddc31216500183b773"
 
 [[projects]]
   digest = "1:8730e0150dfb2b7e173890c8b9868e7a273082ef8e39f4940e3506a481cf895c"
@@ -655,7 +662,7 @@
     "k8s.io/apimachinery/pkg/util/runtime",
     "k8s.io/apimachinery/pkg/util/uuid",
     "k8s.io/apimachinery/pkg/util/wait",
-    "k8s.io/apiserver/pkg/apis/config",
+    "k8s.io/apiserver/pkg/apis/config/v1alpha1",
     "k8s.io/apiserver/pkg/util/logs",
     "k8s.io/client-go/informers",
     "k8s.io/client-go/kubernetes",
@@ -674,7 +681,6 @@
     "k8s.io/kubernetes/pkg/api/v1/pod",
     "k8s.io/kubernetes/pkg/apis/core/v1/helper",
     "k8s.io/kubernetes/pkg/kubectl/util/qos",
-    "k8s.io/kubernetes/pkg/scheduler/apis/config",
     "k8s.io/kubernetes/pkg/scheduler/cache",
     "k8s.io/kubernetes/pkg/scheduler/util",
     "k8s.io/kubernetes/pkg/util/flag",
